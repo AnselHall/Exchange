@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getRate() {
-        
     }
 
     private void getRmbQuot(String url) {
