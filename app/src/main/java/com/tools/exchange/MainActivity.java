@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.squareup.okhttp.Request;
 import com.tools.exchange.bean.ItemDetail;
+import com.tools.exchange.bean.RateResponse;
 import com.tools.exchange.bean.RmbResponse;
 import com.tools.exchange.net.OkHttpClientManager;
 
@@ -28,18 +29,30 @@ public class MainActivity extends AppCompatActivity {
 
         initComponent();
 
-        String url = "http://apis.haoservice.com/lifeservice/exchange/rmbquot?key=fab86dbca92d49778e0e5ab3d61f8d29";
+        String rmbUrl = "http://apis.haoservice.com/lifeservice/exchange/rmbquot?key=fab86dbca92d49778e0e5ab3d61f8d29";
+        String rateUrl = "http://apis.haoservice.com/lifeservice/exchange/rmbquot?key=fab86dbca92d49778e0e5ab3d61f8d29";
 
         //人民币牌价
-        getRmbQuot(url);
+        getRmbQuot(rmbUrl);
 
         //外汇汇率
-        getRate();
+        getRate(rateUrl);
     }
 
-    private void getRate() {
-    }
+    private void getRate(String rateUrl) {
+        OkHttpClientManager.getAsyn(rateUrl, new OkHttpClientManager.ResultCallback<RateResponse>() {
 
+            @Override
+            public void onError(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(RateResponse response) {
+                
+            }
+        });
+    }
     private void getRmbQuot(String url) {
         OkHttpClientManager.getAsyn(url, new OkHttpClientManager.ResultCallback<RmbResponse>() {
 
