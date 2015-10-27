@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.panwrona.downloadprogressbar.library.DownloadProgressBar;
 import com.squareup.okhttp.Request;
 import com.tools.exchange.bean.ItemDetail;
 import com.tools.exchange.bean.RateResponse;
@@ -27,13 +28,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initComponent();
+        DownloadProgressBar downloadProgressBar = ((DownloadProgressBar) findViewById(R.id.dpv3));
+        downloadProgressBar.setSuccessResultState();
+        downloadProgressBar.setOnProgressUpdateListener(new DownloadProgressBar.OnProgressUpdateListener() {
+            @Override
+            public void onProgressUpdate(float v) {
 
+            }
+
+            @Override
+            public void onAnimationStarted() {
+
+            }
+
+            @Override
+            public void onAnimationEnded() {
+
+            }
+
+            @Override
+            public void onAnimationSuccess() {
+
+            }
+
+            @Override
+            public void onAnimationError() {
+
+            }
+
+            @Override
+            public void onManualProgressStarted() {
+
+            }
+
+            @Override
+            public void onManualProgressEnded() {
+
+            }
+        });
+        initComponent();
         String rmbUrl = "http://apis.haoservice.com/lifeservice/exchange/rmbquot?key=fab86dbca92d49778e0e5ab3d61f8d29";
         String rateUrl = "http://apis.haoservice.com/lifeservice/exchange/rmbquot?key=fab86dbca92d49778e0e5ab3d61f8d29";
 
         //人民币牌价
         getRmbQuot(rmbUrl);
+
 
         //外汇汇率
         getRate(rateUrl);
@@ -49,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(RateResponse response) {
-                
+
             }
         });
     }
