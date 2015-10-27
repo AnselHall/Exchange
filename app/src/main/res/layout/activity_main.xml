@@ -60,14 +60,15 @@
         android:text="@string/hello_world"/>
 
     <com.panwrona.downloadprogressbar.library.DownloadProgressBar
+        android:background="#aaaaaa"
         android:id="@+id/dpv3"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        app:circleBackgroundColor="@color/red_light_primary_color"
+        app:circleBackgroundColor="@color/blue_primary_color"
         app:progressBackgroundColor="@color/red_light_primary_color"
-        app:progressColor="@color/red_text_icon_color"
+        app:progressColor="@color/blue_primary_color"
         app:drawingColor="@color/red_text_icon_color"
         app:progressDuration="2000"
         app:resultDuration="5000"
@@ -76,4 +77,14 @@
         app:strokeWidth="3dp"
         app:overshootValue="2.5"
         />
+
+    <TextView
+        android:id="@+id/success_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
+        android:textSize="40sp"
+        android:textColor="@color/blue_light_primary_color"
+        android:text="Click to download" />
 </LinearLayout>

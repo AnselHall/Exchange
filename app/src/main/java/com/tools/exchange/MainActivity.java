@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.panwrona.downloadprogressbar.library.DownloadProgressBar;
@@ -22,14 +23,58 @@ public class MainActivity extends AppCompatActivity {
     private String responseString;
 
     private ItemDetail testItem;
+    private DownloadProgressBar downloadProgressBar;
+    private TextView successTextView;
+    private int val = 0;
+    private int p = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DownloadProgressBar downloadProgressBar = ((DownloadProgressBar) findViewById(R.id.dpv3));
-        downloadProgressBar.setSuccessResultState();
+        downloadProgressBar = ((DownloadProgressBar) findViewById(R.id.dpv3));
+        successTextView = (TextView)findViewById(R.id.success_text_view);
+        successTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                val = val + 10;
+                downloadProgressBar.setProgress(val);
+            }
+        });
+
+//        Typeface robotoFont=Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+//        successTextView.setTypeface(robotoFont);
+
+        downloadProgressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadProgressBar.playManualProgressAnimation();
+            }
+        });
+
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for (int i = 0; i < 100; i++) {
+                        Thread.sleep(100);
+                        p = i;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                downloadProgressBar.setProgress(p);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();*/
+
+
+
         downloadProgressBar.setOnProgressUpdateListener(new DownloadProgressBar.OnProgressUpdateListener() {
             @Override
             public void onProgressUpdate(float v) {
@@ -38,22 +83,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationStarted() {
-
+                downloadProgressBar.setEnabled(false);
             }
 
             @Override
             public void onAnimationEnded() {
-
+                downloadProgressBar.setEnabled(true);
             }
 
             @Override
             public void onAnimationSuccess() {
-
+                successTextView.setText("Downloaded!");
             }
 
             @Override
             public void onAnimationError() {
-
+                successTextView.setText("Aborted!");
             }
 
             @Override
